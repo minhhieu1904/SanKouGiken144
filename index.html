@@ -21,20 +21,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body class="bg-light p-4">
-    <div>
+  <body class="bg-light">
+    <div id="main-box" class="p-3">
       <h1 class="mb-4 text-center">Stamp 144 | Tem 144</h1>
 
       <form id="form-design" class="row g-3">
         <div class="col-12">
           <span>
             A label printing application that generates templates directly from
-            Excel files. Select a file and print instantly.
+            Excel files. Select a file and scan instantly.
           </span>
           <br />
           <span>
             Ứng dụng in tem nhãn theo mẫu từ file Excel, cho phép chọn file, đọc
-            dữ liệu và in trực tiếp.
+            dữ liệu và quét trực tiếp.
           </span>
         </div>
         <div class="col-12">
@@ -53,61 +53,6 @@
           </div>
         </div>
       </form>
-
-      <div class="page mt-5 p-5 d-none">
-        <table class="table table-bordered">
-          <tbody>
-            <tr>
-              <td class="text-center" colspan="3">
-                <span>SAIKOU GIKEN VIETNAM</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center" colspan="3">
-                <span>Số 10, Đ.12, KCN VSIPII-A, Vĩnh Tân, TP.HCM</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>SDT</span>
-              </td>
-              <td>
-                <span>0835.345.345</span>
-              </td>
-              <td>
-                <span>XUẤT XỨ: VIỆT NAM</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>MÃ</span>
-              </td>
-              <td colspan="2">
-                <span id="code"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>ORDER</span>
-              </td>
-              <td colspan="2">
-                <span id="order" class="text-end"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>SL:</span>
-              </td>
-              <td>
-                <span id="quantity"></span>
-              </td>
-              <td class="text-center">
-                <span>pcs</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
 
       <div id="footer" class="row text-center">
         <div class="col-12">Copyright ©2026 Vien Thong Le Gia.</div>
@@ -131,9 +76,13 @@
       </div>
     </div>
 
-    <div id="spinner-overlay">
-      <div class="spinner"></div>
-      <p id="spinner-text">Đang xử lý...</p>
+    <div id="spinner">
+      <div class="animation-2">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+      </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->

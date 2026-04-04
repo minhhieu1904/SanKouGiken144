@@ -7,12 +7,11 @@ const excelInput = document.getElementById('excelFile');
 const btnPrint = document.getElementById('btnPrint');
 
 const spinner = {
-  show(text = 'Đang xử lý...') {
-    document.getElementById('spinner-text').textContent = text;
-    document.getElementById('spinner-overlay').classList.add('show');
+  show() {
+    document.getElementById('spinner').classList.add('active');
   },
   hide() {
-    document.getElementById('spinner-overlay').classList.remove('show');
+    document.getElementById('spinner').classList.remove('active');
   }
 };
 
@@ -31,7 +30,7 @@ excelInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
   if (!file) return;
 
-  spinner.show('Đang đọc file...');
+  spinner.show();
 
   const reader = new FileReader();
   reader.onload = (e) => {
@@ -62,7 +61,7 @@ btnPrint.addEventListener('click', async () => {
     return;
   }
 
-  spinner.show('Đang chuẩn bị in...');
+  spinner.show();
   const html = buildPrintHTML(dataRows);
   ipcRenderer.send('print-html', html);
 });
@@ -73,7 +72,6 @@ function buildPrintHTML(rows) {
 
   const pages = rows.map((row) => buildPage(row)).join('\n');
 
-  // excelInput.value = '';
   spinner.hide();
 
   return `
