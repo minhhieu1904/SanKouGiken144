@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Saikou Giken</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/font-awesome/css/font-awesome.css"
+    />
+    <link rel="stylesheet" href="toast.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-light p-4">
+    <div>
+      <h1 class="mb-4 text-center">Stamp 144 | Tem 144</h1>
+
+      <form id="form-design" class="row g-3">
+        <div class="col-12">
+          <span>
+            A label printing application that generates templates directly from
+            Excel files. Select a file and print instantly.
+          </span>
+          <br />
+          <span>
+            Ứng dụng in tem nhãn theo mẫu từ file Excel, cho phép chọn file, đọc
+            dữ liệu và in trực tiếp.
+          </span>
+        </div>
+        <div class="col-12">
+          <div class="input-group">
+            <input
+              type="file"
+              id="excelFile"
+              name="excelFile"
+              class="form-control"
+              accept=".xlsx, .xls, .csv, .xlsm, .xlsb"
+              placeholder="select excel file"
+            />
+            <button type="button" id="btnPrint" class="btn btn-success">
+              <i class="fa fa-print"></i> Print
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="page mt-5 p-5 d-none">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td class="text-center" colspan="3">
+                <span>SAIKOU GIKEN VIETNAM</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center" colspan="3">
+                <span>Số 10, Đ.12, KCN VSIPII-A, Vĩnh Tân, TP.HCM</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>SDT</span>
+              </td>
+              <td>
+                <span>0835.345.345</span>
+              </td>
+              <td>
+                <span>XUẤT XỨ: VIỆT NAM</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>MÃ</span>
+              </td>
+              <td colspan="2">
+                <span id="code"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>ORDER</span>
+              </td>
+              <td colspan="2">
+                <span id="order" class="text-end"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>SL:</span>
+              </td>
+              <td>
+                <span id="quantity"></span>
+              </td>
+              <td class="text-center">
+                <span>pcs</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="footer" class="row text-center">
+        <div class="col-12">Copyright ©2026 Vien Thong Le Gia.</div>
+        <div class="col-12">
+          Designed by LeGia CO.,Ltd
+          <a
+            id="link-website"
+            target="_blank"
+            href="https://vienthonglegia.com/"
+            >Vienthonglegia.com</a
+          >
+          | 0969.62.4547
+        </div>
+      </div>
+    </div>
+
+    <div id="toast">
+      <div id="toast-box" class="d-flex align-items-center">
+        <i id="toast-icon"></i>
+        <p id="toast-title"></p>
+      </div>
+    </div>
+
+    <div id="spinner-overlay">
+      <div class="spinner"></div>
+      <p id="spinner-text">Đang xử lý...</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="toast.js"></script>
+    <script src="renderer.js"></script>
+  </body>
+</html>

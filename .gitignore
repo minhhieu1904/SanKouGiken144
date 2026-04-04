@@ -1,0 +1,14 @@
+.vscode
+.history
+.vs
+dist
+app
+.sln
+/package-lock.json
+/yarn.lock
+/node_modules
+/app-releases
+*.rar
+*.zip
+app*
+sankougiken144*
