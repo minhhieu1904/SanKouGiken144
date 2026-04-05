@@ -17,8 +17,13 @@
       rel="stylesheet"
       href="node_modules/font-awesome/css/font-awesome.css"
     />
-    <link rel="stylesheet" href="toast.css" />
+
+    <link rel="stylesheet" href="./components/toast/toast.css" />
+    <link rel="stylesheet" href="./components/spinner/spinner.css" />
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Import tabs html component -->
+    <script type="module" src="gender-components.js"></script>
   </head>
 
   <body class="bg-light">
@@ -37,6 +42,36 @@
             dữ liệu và quét trực tiếp.
           </span>
         </div>
+
+        <hr />
+
+        <div class="col-12">
+          <span> SerialPort configuration / Cấu hình SerialPort. </span>
+        </div>
+
+        <div class="col-6">
+          <label for="spPath" class="form-label">COM</label>
+          <input
+            id="spPath"
+            name="spPath"
+            type="text"
+            class="form-control"
+            placeholder="Enter COM / Nhập COM..."
+          />
+        </div>
+        <div class="col-6">
+          <label for="spBaudRate" class="form-label">Port</label>
+          <input
+            id="spBaudRate"
+            name="spBaudRate"
+            type="number"
+            class="form-control"
+            placeholder="Enter Port / Nhập Port..."
+          />
+        </div>
+
+        <hr />
+
         <div class="col-12">
           <div class="input-group">
             <input
@@ -47,10 +82,87 @@
               accept=".xlsx, .xls, .csv, .xlsm, .xlsb"
               placeholder="select excel file"
             />
-            <button type="button" id="btnPrint" class="btn btn-success">
-              <i class="fa fa-print"></i> Print
-            </button>
           </div>
+        </div>
+        <div class="col-6">
+          <span id="dataCount">Data not found.</span>
+        </div>
+        <div class="col-6">
+          <span id="dataCountVN">Chưa có dữ liệu.</span>
+        </div>
+      </form>
+
+      <hr />
+
+      <form id="form-data" class="row g-3">
+        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+          <label for="scanBarcode" class="form-label">Mã quét</label>
+          <input
+            id="scanBarcode"
+            name="scanBarcode"
+            type="text"
+            class="form-control"
+            placeholder="Scan code / Mã quét..."
+          />
+        </div>
+        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+          <label for="code" class="form-label">Mã hàng</label>
+          <input
+            id="code"
+            name="code"
+            type="text"
+            class="form-control"
+            placeholder="Product code / Mã hàng..."
+            readonly
+            disabled
+          />
+        </div>
+        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+          <label for="order1" class="form-label">Mã đơn</label>
+          <input
+            id="order1"
+            name="order1"
+            type="text"
+            class="form-control"
+            placeholder="Order / Mã đơn..."
+            readonly
+            disabled
+          />
+        </div>
+        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+          <label for="order2" class="form-label">Mã đơn 2</label>
+          <input
+            id="order2"
+            name="order2"
+            type="text"
+            class="form-control"
+            placeholder="Order 2 / Mã đơn 2..."
+            readonly
+            disabled
+          />
+        </div>
+        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+          <label for="quantity" class="form-label">Số lượng</label>
+          <input
+            id="quantity"
+            name="quantity"
+            type="number"
+            class="form-control"
+            placeholder="Quantity / Số lượng..."
+            readonly
+            disabled
+          />
+        </div>
+        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+          <label for="numPage" class="form-label">Sản phẩm trên mỗi tờ</label>
+          <input
+            id="numPage"
+            name="numPage"
+            type="number"
+            class="form-control"
+            placeholder="Products per sheet / Sản phẩm trên mỗi tờ..."
+            min="1"
+          />
         </div>
       </form>
 
@@ -69,29 +181,15 @@
       </div>
     </div>
 
-    <div id="toast">
-      <div id="toast-box" class="d-flex align-items-center">
-        <i id="toast-icon"></i>
-        <p id="toast-title"></p>
-      </div>
-    </div>
+    <my-toast></my-toast>
 
-    <div id="spinner">
-      <div class="animation-2">
-        <div class="shape shape1"></div>
-        <div class="shape shape2"></div>
-        <div class="shape shape3"></div>
-        <div class="shape shape4"></div>
-      </div>
-    </div>
+    <my-spinner></my-spinner>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script src="toast.js"></script>
     <script src="renderer.js"></script>
   </body>
 </html>

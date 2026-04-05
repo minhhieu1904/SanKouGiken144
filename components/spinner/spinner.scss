@@ -1,0 +1,160 @@
+#spinner {
+    display: none;
+
+    &.active {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(2px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .animation-2 {
+        transform: rotate(10deg);
+        animation: rotation 1s infinite;
+
+        .shape {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 10px;
+
+            &.shape1 {
+                left: 0;
+                background-color: #001dbe;
+            }
+
+            &.shape2 {
+                right: 0;
+                background-color: #009e00;
+            }
+
+            &.shape3 {
+                bottom: 0;
+                background-color: #d37f00;
+            }
+
+            &.shape4 {
+                bottom: 0;
+                right: 0;
+                background-color: #df0f00;
+            }
+        }
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@mixin customTranslate($shape, $tx, $ty) {
+    @if $shape ==1 {
+        transform: translate($tx, $ty);
+    }
+
+    @else if $shape ==2 {
+        transform: translate(-$ty, $tx);
+    }
+
+    @else if $shape ==3 {
+        transform: translate($ty, -$tx);
+    }
+
+    @else if $shape ==4 {
+        transform: translate(-$tx, -$ty);
+    }
+}
+
+@for $i from 1 through 6 {
+    @for $j from 1 through 4 {
+        $duration: 0.5s;
+        $timing: ease;
+        $delay: 0s;
+        $direction: alternate;
+
+        $a: null;
+
+        @if $i==1 {
+            $a: 16px;
+        }
+
+        @else if $i==2 {
+            $a: 20px;
+        }
+
+        @else if $i==3 {
+            $a: 5px;
+        }
+
+        @else if $i==4 {
+            $a: 5px;
+            $duration: 0.3s;
+
+            @if $j ==2 or $j ==3 {
+                $delay: 0.3s;
+            }
+        }
+
+        @else if $i==5 {
+            $a: 15px;
+            $duration: 2s;
+            $direction: reverse;
+        }
+
+        @else if $i==6 {
+            $a: 18px;
+            $timing: linear;
+            $duration: 2s;
+            $direction: normal;
+        }
+
+        .animation-#{$i} {
+            .shape#{$j} {
+                animation: animation#{$i}shape#{$j} $duration $timing $delay infinite $direction;
+            }
+        }
+
+        @if $i ==5 or $i ==6 {
+            @keyframes animation#{$i}shape#{$j} {
+                0% {
+                    transform: translate(0, 0);
+                }
+
+                25% {
+                    @include customTranslate($j, 0, $a);
+                }
+
+                50% {
+                    @include customTranslate($j, $a, $a);
+                }
+
+                75% {
+                    @include customTranslate($j, $a, 0);
+                }
+            }
+        }
+
+        @else {
+            @keyframes animation#{$i}shape#{$j} {
+                from {
+                    transform: translate(0, 0);
+                }
+
+                to {
+                    @include customTranslate($j, $a, $a);
+                }
+            }
+        }
+    }
+}

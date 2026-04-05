@@ -1,12 +1,14 @@
 {
   "name": "sankougiken144",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win",
     "style-css": "sass style.scss style.css --no-source-map --style=compressed",
-    "toast-css": "sass toast.scss toast.css --no-source-map --style=compressed"
+    "print-css": "sass print.scss print.css --no-source-map --style=compressed",
+    "toast-css": "sass ./components/toast/toast.scss ./components/toast/toast.css --no-source-map --style=compressed",
+    "spinner-css": "sass ./components/spinner/spinner.scss ./components/spinner/spinner.css --no-source-map --style=compressed"
   },
   "author": "Hieu Nguyen",
   "license": "MIT",
@@ -14,13 +16,14 @@
   "devDependencies": {
     "electron": "41.1.1",
     "electron-builder": "26.8.1",
-    "sass": "^1.99.0"
+    "sass": "1.99.0"
   },
   "dependencies": {
     "bootstrap": "5.3.8",
     "font-awesome": "4.7.0",
     "jquery": "4.0.0",
-    "xlsx": "^0.18.5"
+    "serialport": "13.0.0",
+    "xlsx": "0.18.5"
   },
   "build": {
     "appId": "sankougiken144.app",

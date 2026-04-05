@@ -58,3 +58,11 @@ function hide() {
     toastTitle.innerHTML = '';
     toast.style.display = 'none';
 }
+
+module.exports = {
+    success,
+    warning,
+    error,
+    show,
+    hide
+}

@@ -5,8 +5,8 @@ const fs = require('fs');
 
 function createWindow() {
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1200,
+        height: 800,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -15,7 +15,7 @@ function createWindow() {
     });
 
     // Open DevTools
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     win.loadFile('index.html');
 }
@@ -53,9 +53,20 @@ ipcMain.on('print-html', (event, html) => {
     win.loadFile(tmpFile);
 
     win.webContents.once('did-finish-load', () => {
-        win.webContents.print({ silent: false, printBackground: true }, (success, error) => {
+        win.webContents.print({
+            silent: false,
+            margins: { marginType: 'none' },
+            printBackground: true,
+            scaleFactor: 100,
+            pageSize: {
+                width: 50000,  // 50mm
+                height: 30000  // 30mm
+            }
+        }, (success, error) => {
             win.close();
             fs.unlinkSync(tmpFile);
+
+            event.sender.send('print-done');
         });
     });
 });
