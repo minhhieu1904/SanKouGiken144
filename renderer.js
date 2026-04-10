@@ -54,7 +54,9 @@ function initSerialPort() {
       port.on('data', (data) => {
         scanBarcode.value = data.toString();
 
-        handleScanCode(scanBarcode.value);
+        let barcode = scanBarcode.value.startsWith('M') ? scanBarcode.value.substring(1) : scanBarcode.value;
+
+        handleScanCode(barcode?.trim());
       });
 
       port.on('error', (err) => {
@@ -154,8 +156,10 @@ scanBarcode.addEventListener('keydown', (e) => {
 });
 
 function handleScanCode(barcode) {
+  console.log('Scanned barcode:', barcode);
+  console.log('Data rows:', dataRows);
   const row = dataRows.find(r => {
-    const codeKey = Object.keys(r).find(k => k.trim().toLowerCase() === 'order1');
+    const codeKey = findKeyIgnoreCase(r, 'order1');
     return codeKey && r[codeKey] && r[codeKey].toString().trim() === barcode;
   });
 
@@ -167,10 +171,10 @@ function handleScanCode(barcode) {
 
   currentDataRow = row;
 
-  code.value = row[Object.keys(row).find(k => k.trim().toLowerCase() === 'mã hàng')];
-  order1.value = row[Object.keys(row).find(k => k.trim().toLowerCase() === 'order1')];
-  order2.value = row[Object.keys(row).find(k => k.trim().toLowerCase() === 'order2')];
-  quantity.value = row[Object.keys(row).find(k => k.trim().toLowerCase() === 'sl')];
+  code.value = row[findKeyIgnoreCase(row, 'mã hàng')];
+  order1.value = row[findKeyIgnoreCase(row, 'order1')];
+  order2.value = row[findKeyIgnoreCase(row, 'order2')];
+  quantity.value = row[findKeyIgnoreCase(row, 'sl')];
   numPage.value = 1;
 
   numPage.focus();
@@ -191,7 +195,7 @@ numPage.addEventListener('keydown', (e) => {
     spinner.show();
 
     let rows = [];
-    let totalQuantity = currentDataRow[Object.keys(currentDataRow).find(k => k.trim().toLowerCase() === 'sl')];
+    let totalQuantity = currentDataRow[findKeyIgnoreCase(currentDataRow, 'sl')] ?? 0;
 
     if (numPages > 1) {
       let cloneDataRow = { ...currentDataRow };
@@ -201,7 +205,7 @@ numPage.addEventListener('keydown', (e) => {
           ? totalQuantity % numPages || numPages
           : numPages;
         let newDataRow = { ...cloneDataRow };
-        newDataRow[Object.keys(newDataRow).find(k => k.trim().toLowerCase() === 'sl')] = quantity;
+        newDataRow[findKeyIgnoreCase(newDataRow, 'sl')] = quantity;
 
         rows.push(newDataRow);
       }
@@ -254,7 +258,7 @@ function buildPrintHTML(rows, totalQuantity, numPages = 1) {
 function buildPage(row, totalQuantity, numPages = 1) {
   const fieldValues = {};
   FIELD_MAP.forEach(({ field, elementId }) => {
-    const key = Object.keys(row).find(k => k.trim().toLowerCase() === field.toLowerCase());
+    const key = findKeyIgnoreCase(row, field);
     fieldValues[elementId] = key ? (row[key] ?? '') : '';
 
     if (elementId === 'quantity' && numPages > 1) {
@@ -294,5 +298,9 @@ function buildPage(row, totalQuantity, numPages = 1) {
           </table>
         </div>
     `;
+}
+
+function findKeyIgnoreCase(obj, targetKey) {
+  return Object.keys(obj).find(k => k.trim().toLowerCase() === targetKey.trim().toLowerCase());
 }
 //#endregion

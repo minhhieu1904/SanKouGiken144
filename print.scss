@@ -33,12 +33,14 @@ body {
 .page table {
     width: 100%;
     height: 100%;
+    border: 0.01mm solid #000;
 }
 
 .page table td {
-    padding: 0 0.5mm !important;
+    padding: 0 0.2mm !important;
     vertical-align: middle;
     overflow: hidden;
+    border: 0.01mm solid #000;
 }
 
 .page table td span {
@@ -46,4 +48,5 @@ body {
     white-space: nowrap;
     font-size: 9px;
     overflow: hidden;
+    font-weight: bold;
 }
