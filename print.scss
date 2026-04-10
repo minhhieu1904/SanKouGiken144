@@ -19,7 +19,7 @@ body {
 .page {
     width: 50mm;
     height: 30mm;
-    padding: 0.5mm 0.5mm 0.5mm 2mm;
+    padding: 1.5mm 0 0.5mm 2.5mm;
     overflow: hidden;
     page-break-after: always;
     break-after: page;
@@ -37,7 +37,7 @@ body {
 }
 
 .page table td {
-    padding: 0 0.2mm !important;
+    padding: 0 !important;
     vertical-align: middle;
     overflow: hidden;
     border: 0.01mm solid #000;
@@ -46,7 +46,8 @@ body {
 .page table td span {
     display: block;
     white-space: nowrap;
-    font-size: 9px;
+    font-size: 8.5px;
     overflow: hidden;
     font-weight: bold;
+    padding: 0 !important;
 }
