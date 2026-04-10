@@ -156,8 +156,6 @@ scanBarcode.addEventListener('keydown', (e) => {
 });
 
 function handleScanCode(barcode) {
-  console.log('Scanned barcode:', barcode);
-  console.log('Data rows:', dataRows);
   const row = dataRows.find(r => {
     const codeKey = findKeyIgnoreCase(r, 'order1');
     return codeKey && r[codeKey] && r[codeKey].toString().trim() === barcode;
